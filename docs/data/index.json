@@ -1,0 +1,31 @@
+{
+    "team": [
+        {
+            "name": "Seekubadu H.D.",
+            "email": "e18323@eng.pdn.ac.lk",
+            "eNumber": "E/18/323"
+        },
+        {
+            "name": "Sewwandi H.R.",
+            "email": "e18330@eng.pdn.ac.lk",
+            "eNumber": "E/18/330"
+        },
+        {
+            "name": "Vindula K.P.A.",
+            "email": "e18375@eng.pdn.ac.lk",
+            "eNumber": "E/18/375"
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Dr. Mahanama Wickramasinghe",
+            "email": "mahanamaw@eng.pdn.ac.lk"
+        },
+        {
+            "name": "Poornima Lankani",
+            "email": "lankaniperera@eng.pdn.ac.lk"
+        }
+    ],
+    
+    "tags": ["Web", "Automated Tools"]
+}
