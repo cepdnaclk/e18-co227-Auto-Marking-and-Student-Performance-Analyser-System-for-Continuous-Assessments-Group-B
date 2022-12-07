@@ -1,0 +1,10 @@
+1. GitHub classroom intergratability checked. 
+
+Can implement multiple languages and use Test cases to evaluate students.
+However there is no api for Github Classrooms. So we have to use .csv to do the analysis
+
+2. Wordpress setup for the development of website.
+
+Wordpress gives free domain for development of websites, but with very limited number of features.
+So we made our WordPress setup in a local environment (on localhost) and shared it among team members using a live link.
+

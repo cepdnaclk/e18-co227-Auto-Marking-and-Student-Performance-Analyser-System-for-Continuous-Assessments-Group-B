@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    //pie chart
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    //table
+    google.charts.load('current', {'packages':['table']});
+    google.charts.setOnLoadCallback(drawTable);
+
+    //bar chart
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawMultSeries);
+
+    //cloumn charts
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart_4);
+
+    //--------------------------------------------------------------------
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            {% for key, value in data.items() %}
+                {% if value is string %}
+                    ['{{ key }}', '{{ value }}'],
+                {% else %}
+                    ['{{ key }}', {{ value }}],
+                {% endif %}
+            {% endfor %}
+        ]);
+ 
+        var options = {
+          title: 'Student Acception of the Assignment',
+          is3D: true,
+          fontSize:15,
+          fontName:'Arial',
+          width:600,
+          height:500
+          
+        };
+ 
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+
+
+      // ----------------------------------------------------------------
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'E Number');
+        data.addColumn('number', 'Marks');
+        data.addColumn('string', 'Assignment Submission Status');
+        data.addRows([
+          {% for stud in student_data %}
+              ['{{stud[0]}}',{{stud[1]}}, '{{stud[2]}}'],
+          {% endfor %}
+        ]);
+
+        var table_option = {titile:'assignment submission status',
+                            width:500,
+                            height:300
+                        };
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, table_option);
+      }
+      //-----------------------------------------------------------------------
+
+      function drawMultSeries() {
+        var data = google.visualization.arrayToDataTable([
+            {% for value in data_3 %}
+               {% if value[1] is string %}
+                 ['{{value[0]}}','{{value[1]}}','{{value[2]}}'],
+               {% else %}
+                 ['{{value[0]}}',{{value[1]}},{{value[2]}}],
+               {% endif %}
+            {% endfor %}
+       
+        ]);
+
+        var options = {
+            title: 'Total Marks of Students for each assignments',
+            width:600,
+            height:2000,
+            chartArea: {width: '50%'},
+            hAxis: {
+            title: 'Total Marks',
+            minValue: 0
+            },
+            vAxis: {
+            title: 'E Numbers'
+            },
+            bar: { groupWidth: "75%" }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    //-------------------------------------------------------
+    function drawChart_4() {
+        var data = google.visualization.arrayToDataTable([
+            {% for value in data_4 %}
+                {% if value[1] is string %}
+                    ['{{value[0]}}', '{{value[1]}}'],
+                {% else %}
+                    ['{{value[0]}}', {{value[1]}}],
+                {% endif %}
+            {% endfor %}
+        ]);
+ 
+        var options = {
+        title: "Average Marks Vs Assignments",
+        width: 500,
+        height: 500,
+        bar: {groupWidth: "90%"},
+        legend: { position: "none" },
+        vAxis:{ticks:[0,10,20,30,40,50,60,70,80,90,100]}
+      };
+ 
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(data, options);
+      }
+      //-------------------------------------------------------------
+    </script>
+    </head>
+
+    <body>
+    <!--Table and divs that hold the pie charts and table-->
+    <table style="margin-left:250px">
+        <tr bgcolor="F0FFFF">
+            <td><div id="piechart_3d" ></div></td>
+            <td class="centerText"><h3>Acceptation of the Assignment</h3><br>This Pie chart is showing <br>the percentages of the <br>students who have accepted and <br>not accepted the assignment.<br></td>
+            
+        </tr>
+        <tr bgcolor="F0FFFF">
+            
+            <td class="centerText"><h3>Submission Status of the Assignment</h3><br>This Table dispalys the students with their <br> E numbers,  marks and assignment submission status.<br></td>
+            <td><div id="table_div" ></div></td>
+        </tr>
+        <tr bgcolor="F0FFFF">
+            <td><div id="chart_div" ></div></td>
+            <td class="centerText"><h3>Total Marks for all Assignments</h3><br>This bar chart shows <br>the total marks of each students for their all assignments.</td>
+            
+        </tr>
+        <tr bgcolor="F0FFFF">
+            
+            <td class="centerText"><div><h3>Average Marks for the Assignments</h3><br>This Column chart shows <br>average marks for the given assignments.</div></td>
+            <td><div id="columnchart_values"  ></div></td>
+           
+        </tr>
+        
+    </table>
+    </body>
+</html>
